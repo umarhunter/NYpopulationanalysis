@@ -5,6 +5,7 @@ Program Description: Uses Python's Pandas, Matplotlib, and other libraries to an
 **Current Version:** 1
 **Features:**
 - reads CSV file
+- instructions/tutorial
 - allows user inputs
 - contains necessary functionality for implementation in version 2
 
@@ -13,3 +14,8 @@ Program Description: Uses Python's Pandas, Matplotlib, and other libraries to an
 - visual graphs using Matplotlib
 - variety of graphical options based off user input
 - error checking
+
+**Upcoming Version:** 3
+**Features:**
+- saving file
+- fast facts about selected county

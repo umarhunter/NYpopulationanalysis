@@ -7,11 +7,12 @@ import pandas as pd
 
 def tutorial():
     print("*********************\nTutorial\n*********************")
-    print("This program will allow you to select a county in New York State. Upon selection, it will allow you to see "
+    print("This program will allow you to select a county in New York State. The years supported are 1970 to 2020. Upon selection, it will allow you to see "
           "statistical information about the selected county. All the necessary user inputs will be done through the "
           "console.")
-    print("")
-    viewInput = input("")
+    whileVar = 1
+    while (whileVar > 0):
+        viewInput = input("")
 
 
 def fastfacts():
@@ -24,17 +25,30 @@ def fastfacts():
 
 
 if __name__ == '__main__':
+    population = pd.read_csv('annualpopulation.csv', skiprows=0)
     print("                                         State of New York                        ")
     print("                                    Population Analysis Program                   ")
     print("************************************************************************************************\n         "
           "                   This program was created by: Umar Faruque                            "
           "\n************************************************************************************************\n")
+    tutorialWV = 1
+    while tutorialWV > 0:
+        tutorialInput = input("Tutorial? y/n: ")
+        if tutorialInput == 'y':
+            tutorial()
+            tutorialWV = 0
+        elif tutorialInput == 'n':
+            tutorialWV = 0
+            pass
+        else:
+            print("Invalid input. Enter y or n.")
+    # maybe ask user if they need a list of the counties here
     county = input("Please enter a county: ")
     county = county.title()
-    # outputFile = input("Please enter output name: ")
-    population = pd.read_csv('annualpopulation.csv', skiprows=0)
+    outputFile = file.pdf
+    locationData = population.groupby('Geography')
     countyPop = population.groupby().get_group(county)
-    population.plot(x='Date of Interest', y='Fraction')
+    population.plot(x=countyPop, y='Population')
 
-    # fig = plt.gcf()
-    # fig.savefig(outputFile)
+    fig = plt.gcf()
+    fig.savefig(outputFile)

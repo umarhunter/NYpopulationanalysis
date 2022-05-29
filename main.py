@@ -1,5 +1,6 @@
 # Property of Umar Faruque
 # See readme for documentation
+import csv
 
 import matplotlib.pyplot as plt
 import pandas as pd
@@ -34,38 +35,45 @@ if __name__ == '__main__':
     print("************************************************************************************************\n         "
           "                   This program was created by: Umar Faruque                            "
           "\n************************************************************************************************\n")
-    tutorialWV = 1
-    while tutorialWV > 0:
+    truthVar = 1
+    while truthVar > 0:
         tutorialInput = input("Tutorial? y/n: ")
         if tutorialInput == 'y':
             tutorial()
-            tutorialWV = 0
+            truthVar = 0
         elif tutorialInput == 'n':
-            tutorialWV = 0
+            truthVar = 0
             pass
         else:
             print("Invalid input. Enter y or n.")
 
-    while tutorialWV == 0:
+    while truthVar == 0:
         listCounty = input("Would you like to see the list of counties available in this dataset? y/n: ")
         if listCounty == 'y':
-            tutorialWV = 1
+            truthVar = 1
             printCountries()
             print("\nPrinting county list complete. Please scroll up to see the list.\n")
         elif listCounty == 'n':
-            tutorialWV = 1
+            truthVar = 1
             pass
         else:
             print("Invalid input.")
 
-    county = input("Please enter a county: ")
-    # county = 'Queens County' used for speeding through test
-    county = county.title() # capitalizes input so that lower case works
+    #while truthVar == 1:
+    #    county = input("Please enter a valid county: ").title() #get user input and capitalize it in case user submits lowercase characters
+    #    county = county.title()  # capitalizes input so that lower case works
+    #    with open("annualpopulation.csv") as csvfile:
+    #        reader = csv.DictReader(csvfile)
+    #        for row in reader:
+    #            if row['Geography'] == county:
+    #                truthVar = 0
+    #                break
+
+    county = 'Queens County'.title()  # used for speeding through test
     print("In order to see graphs, you must enter an output file, otherwise you will only see statistical information "
           "in the console.\nPlease note: if you would like to create a PDF then append your file with .pdf. The same "
           "logic applies for other file types.")
-    useroutput = input("Please enter the name of the output file: ")
-    outputFile = useroutput
+    outputFile = input("Please enter the name of the output file: ")
 
     sortCounty = population.groupby('Geography').get_group(county)
     sortCounty.plot(x='Year', y='Population')
@@ -73,3 +81,4 @@ if __name__ == '__main__':
     graph.savefig(outputFile)
     print("Population Data for: ", county)
     fastfacts()
+

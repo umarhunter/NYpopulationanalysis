@@ -2,20 +2,23 @@
 
 Program Description: Uses Python's Pandas, Matplotlib, and other libraries to analyze population data for the state of New York. Allows user to select from a variety of options to analyze data.
 
-**Current Version:** 2
+**Current Version:** 2 - Work in progress, stuck on a few things
 
 **Features:**
 - simplified code by adding more task focused functions
 - allows user to choose specific county and year
 - added some statistic to fast facts such as expected growth or decay
 - compare population growth between counties
-- variety of graphical options based off user input
 
 **Upcoming Version:** 3
+
 **Features:**
 TBD -- will most likely be final version and compromise of minor fixes and reorganization
 - extreme changes in population (curves in graphs) will be colored red and green.
+- variety of graphical options based off user input
+
 **Previous Versions:**
+
 **Version 1**
 - reads CSV file
 - instructions/tutorial

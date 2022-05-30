@@ -112,15 +112,12 @@ def beforeCompareCounty(county1, county2):
 
 def compareCounty(county1, county2, startperiod, endperiod):
     #outputfile = input("Please enter the name of the output file: ")
-    from matplotlib.ticker import ScalarFormatter
-    plt.gca().get_yaxis().get_major_formatter().set_useOffset(False)
-
     outputfile = 'file.png'
     sortcounty1 = population.groupby('Geography').get_group(county1)
     plt.plot('Year','Population', 'b', label = county1, data=sortcounty1)
     sortcounty2 = population.groupby('Geography').get_group(county2)
+    sortcounty2.loc[startperiod:endperiod].plot(x='Year')
     plt.plot('Year','Population', 'r', label = county2, data=sortcounty2)
-
     plt.title('Population between ' + county1 + ' and ' + county2 + ' from ' + str(startperiod) + ' to ' + str(endperiod),
               color='black')
     plt.legend(loc='best')

@@ -2,7 +2,6 @@
 # See readme for documentation
 import csv
 import matplotlib.pyplot as plt
-import matplotlib.ticker as ticker
 import pandas as pd
 
 
@@ -18,13 +17,23 @@ def tutorial():
 
 
 def fastFacts():
-    maxYear = sortcounty.loc[sortcounty['Population'].idxmax(), 'Year']
-    minYear = sortcounty.loc[sortcounty['Population'].idxmin(), 'Year']
+    maxYear = sortcounty.loc[
+        sortcounty['Population'].idxmax(), 'Year']  # locate which specific year the population was the highest
+    minYear = sortcounty.loc[
+        sortcounty['Population'].idxmin(), 'Year']  # locate which specific year the population was the lowest
     print("The highest population was", sortcounty['Population'].max(), "in",
           maxYear)
     print("The lowest population was", sortcounty['Population'].min(), "in", minYear)
-    percent = sortcounty.values_count
-    print("Based off the last 10 years, this population is set to be increasing by: ", percent)
+    groupedyears = population.groupby('Geography').get_group(county)
+    recentyears = groupedyears.head(10)
+    mostrecentyear = float(recentyears['Year'].values[0])  # most recent year in dataset
+    yeardecadeago = float(recentyears['Year'].values[-1])  # 10 years ago
+    populationgrowthrate = str(round(float(((mostrecentyear - yeardecadeago) / (yeardecadeago)) * 100),
+                                     3))  # this should calculate the PGR (population growth rate)
+    if mostrecentyear > yeardecadeago:  # determine whether to print decreasing/increasing based off initial values
+        print("Based off the last 10 years, this population is set to be increasing by: ", populationgrowthrate)
+    else:
+        print("Based off the last 10 years, this population is set to be decreasing by: ", populationgrowthrate)
 
 
 def printCountries():
@@ -62,7 +71,7 @@ def getValidCounty():
         county = input(
             "Please enter a valid county: ").title()  # get user input and capitalize it in case user submits lowercase characters
         with open("annualpopulation.csv") as csvfile:
-            reader = csv.DictReader(csvfile)
+            reader = csv.DictReader(csvfile)  # make sure county is valid by checking each county and comparing
             for row in reader:
                 if row['Geography'] == county:
                     truthvar = 0
@@ -73,12 +82,10 @@ def getValidCounty():
 def askCompareCounty(county):
     truthvar = 1
     while (truthvar == 1):
-        # useroption = input("Would you like to compare this county to others?\nPlease enter y/n: ")
-        useroption = 'y'
+        useroption = input("Would you like to compare this county to others?\nPlease enter y/n: ")
         if useroption == 'y':
             truthvar = 0
-            # county2 = getValidCounty()
-            county2 = 'Albany County'
+            county2 = getValidCounty()
             beforeCompareCounty(county, county2)
         elif useroption == 'n':
             truthvar = 0
@@ -89,18 +96,15 @@ def askCompareCounty(county):
 def beforeCompareCounty(county1, county2):
     truthvar = 0
     while truthvar == 0:
-        # askinterval = input(
-        #    "Would you like to compare these two counties within a specific time interval?\nPlease enter y/n: ")
-        askinterval = 'y'
+        askinterval = input(
+            "Would you like to compare these two counties within a specific time interval?\nPlease enter y/n: ")
         if askinterval == 'y':
             truthvar = 1
-            #start = int(input("Enter starting year: "))
-            start = 1998
+            start = int(input("Enter starting year: "))
             while start < 1970 or start > 2020:
                 print("Invalid starting year. Must be between 1970 and 2020.")
                 start = input("Enter starting year: ")
-            #end = int(input("Enter ending year: "))
-            end = 2005
+            end = int(input("Enter ending year: "))
             while end < 1970 or end > 2020:
                 print("Invalid ending year. Must be between 1970 and 2020.")
                 end = input("Enter ending year: ")
@@ -112,16 +116,17 @@ def beforeCompareCounty(county1, county2):
             print("Invalid response. Please try again.")
 
 
-def compareCounty(county1, county2, startperiod, endperiod): # enables us to compare counties
+def compareCounty(county1, county2, startperiod, endperiod):  # enables us to compare counties
     outputfile = input("Please enter the name of the output file: ")
     sortcounty1 = population.groupby('Geography').get_group(county1)
-    plt.plot('Year','Population', 'b', label = county1, data=sortcounty1)
+    plt.plot('Year', 'Population', 'b', label=county1, data=sortcounty1)
     sortcounty2 = population.groupby('Geography').get_group(county2)
-    plt.plot('Year','Population', 'r', label = county2, data=sortcounty2)
-    plt.xlim(startperiod, endperiod) # this allows us to graph the starting-end period
-    plt.title('Population between ' + county1 + ' and ' + county2 + ' from ' + str(startperiod) + ' to ' + str(endperiod),
-              color='black') # the title of the graph
-    plt.legend(loc='best') # places the legend indicator best found suitable
+    plt.plot('Year', 'Population', 'r', label=county2, data=sortcounty2)
+    plt.xlim(startperiod, endperiod)  # this allows us to graph the starting-end period
+    plt.title(
+        'Population between ' + county1 + ' and ' + county2 + ' from ' + str(startperiod) + ' to ' + str(endperiod),
+        color='black')  # the title of the graph
+    plt.legend(loc='best')  # places the legend indicator best found suitable
     graph = plt.gcf()
     graph.savefig(outputfile)
 
@@ -139,8 +144,7 @@ if __name__ == '__main__':
     print("In order to see graphs, you must enter an output file, otherwise you will only see statistical information "
           "in the console.\nPlease note: if you would like to create a PDF then append your file with .pdf. The same "
           "logic applies for other file types.")
-    # outputfile = input("Please enter the name of the output file: ")
-    outputfile = 'file.png'
+    outputfile = input("Please enter the name of the output file: ")
     sortcounty = population.groupby('Geography').get_group(county)
     sortcounty.plot(x='Year', y='Population')
     plt.title('Population in ' + county + " from 1970 to 2020", color='black')

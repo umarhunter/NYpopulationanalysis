@@ -1,8 +1,8 @@
-**Link to Repl: (TBA -- until final build)**
+**Link to Repl: (TBA -- until final version 3 is complete)**
 
 Program Description: Uses Python's Pandas, Matplotlib, and other libraries to analyze population data for the state of New York. Allows user to select from a variety of options to analyze data.
 
-**Current Version:** 2 - Work in progress, stuck on a few things
+**Current Version:** 2
 
 **Features:**
 - simplified code by adding more task focused functions

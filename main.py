@@ -21,8 +21,10 @@ def fastFacts():
     maxYear = sortcounty.loc[sortcounty['Population'].idxmax(), 'Year']
     minYear = sortcounty.loc[sortcounty['Population'].idxmin(), 'Year']
     print("The highest population was", sortcounty['Population'].max(), "in",
-          maxYear)  # we can also use sortcounty['Population'].value_counts()[1]
+          maxYear)
     print("The lowest population was", sortcounty['Population'].min(), "in", minYear)
+    percent = sortcounty.values_count
+    print("Based off the last 10 years, this population is set to be increasing by: ", percent)
 
 
 def printCountries():
@@ -110,17 +112,16 @@ def beforeCompareCounty(county1, county2):
             print("Invalid response. Please try again.")
 
 
-def compareCounty(county1, county2, startperiod, endperiod):
-    #outputfile = input("Please enter the name of the output file: ")
-    outputfile = 'file.png'
+def compareCounty(county1, county2, startperiod, endperiod): # enables us to compare counties
+    outputfile = input("Please enter the name of the output file: ")
     sortcounty1 = population.groupby('Geography').get_group(county1)
     plt.plot('Year','Population', 'b', label = county1, data=sortcounty1)
     sortcounty2 = population.groupby('Geography').get_group(county2)
-    sortcounty2.loc[startperiod:endperiod].plot(x='Year')
     plt.plot('Year','Population', 'r', label = county2, data=sortcounty2)
+    plt.xlim(startperiod, endperiod) # this allows us to graph the starting-end period
     plt.title('Population between ' + county1 + ' and ' + county2 + ' from ' + str(startperiod) + ' to ' + str(endperiod),
-              color='black')
-    plt.legend(loc='best')
+              color='black') # the title of the graph
+    plt.legend(loc='best') # places the legend indicator best found suitable
     graph = plt.gcf()
     graph.savefig(outputfile)
 
@@ -132,10 +133,9 @@ if __name__ == '__main__':
     print("************************************************************************************************\n         "
           "                   This program was created by: Umar Faruque                            "
           "\n************************************************************************************************\n")
-    # askTutorial()
-    # printCountries()
-    # county = getValidCounty()
-    county = 'Queens County'
+    askTutorial()
+    printCountries()
+    county = getValidCounty()
     print("In order to see graphs, you must enter an output file, otherwise you will only see statistical information "
           "in the console.\nPlease note: if you would like to create a PDF then append your file with .pdf. The same "
           "logic applies for other file types.")

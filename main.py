@@ -28,8 +28,7 @@ def fastFacts():
     recentyears = groupedyears.head(10)
     mostrecentyear = float(recentyears['Year'].values[0])  # most recent year in dataset
     yeardecadeago = float(recentyears['Year'].values[-1])  # 10 years ago
-    populationgrowthrate = str(round(float(((mostrecentyear - yeardecadeago) / (yeardecadeago)) * 100),
-                                     3))  # this should calculate the PGR (population growth rate)
+    populationgrowthrate = str(round(float(((mostrecentyear - yeardecadeago) / yeardecadeago) * 100),3)) # this should calculate the PGR (population growth rate)
     if mostrecentyear > yeardecadeago:  # determine whether to print decreasing/increasing based off initial values
         print("Based off the last 10 years, this population is set to be increasing by: ", populationgrowthrate)
     else:
@@ -111,7 +110,8 @@ def beforeCompareCounty(county1, county2):
             compareCounty(county1, county2, start, end)
         elif askinterval == 'n':
             truthvar = 1
-            break
+            print("Displaying latest population differences between the two (for most recent year): ")
+            compareCounty(county1,county2,2019,2020)
         else:
             print("Invalid response. Please try again.")
 

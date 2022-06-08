@@ -17,13 +17,10 @@ def tutorial():
 
 
 def fastFacts():
-    maxYear = sortcounty.loc[
-        sortcounty['Population'].idxmax(), 'Year']  # locate which specific year the population was the highest
-    minYear = sortcounty.loc[
-        sortcounty['Population'].idxmin(), 'Year']  # locate which specific year the population was the lowest
-    print("The highest population was", sortcounty['Population'].max(), "in",
-          maxYear)
-    print("The lowest population was", sortcounty['Population'].min(), "in", minYear)
+    maxyear = sortcounty.loc[sortcounty['Population'].idxmax(), 'Year']  # locate which specific year the population was the highest
+    minyear = sortcounty.loc[sortcounty['Population'].idxmin(), 'Year']  # locate which specific year the population was the lowest
+    print("The highest population was", sortcounty['Population'].max(), "in", maxyear)
+    print("The lowest population was", sortcounty['Population'].min(), "in", minyear)
     groupedyears = population.groupby('Geography').get_group(county)
     recentyears = groupedyears.head(10)
     mostrecentyear = float(recentyears['Year'].values[0])  # most recent year in dataset

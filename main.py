@@ -10,10 +10,12 @@ def tutorial():
     print(
         "This program will allow you to select a county in New York State. The years supported are 1970 to 2020. Upon "
         "selection, it will allow you to see "
-        "statistical information about the selected county. All the necessary user inputs will be done through the "
+        "statistical information about the selected county. It will also allow you to visually compare two counties. "
+        "All the necessary user inputs will be done through the "
         "console.")
     print("If you are not familiar with New York State counties, then you will be given the choice to view a list "
-          "of available counties. Newly registered counties after 2020 are not supported.\n*****************************************************")
+          "of available counties. Newly registered counties after 2020 are not "
+          "supported.\n*****************************************************")
 
 
 def fastFacts():
@@ -32,7 +34,7 @@ def fastFacts():
         print("Based off the last 10 years, this population is set to be decreasing by: ", populationgrowthrate)
 
 
-def printCountries():
+def printCountries(): # prints a list of all available counties
     truthvar = 0
     while truthvar == 0:
         listCounty = input("Would you like to see the list of counties available in this dataset? y/n: ")
@@ -47,7 +49,7 @@ def printCountries():
             print("Invalid input.")
 
 
-def askTutorial():
+def askTutorial(): # asks if the user would like a tutorial
     truthvar = 1
     while truthvar > 0:
         tutorialinput = input("Tutorial? y/n: ")
@@ -61,7 +63,7 @@ def askTutorial():
             print("Invalid input. Enter y or n.")
 
 
-def getValidCounty():
+def getValidCounty(): # retrieves a VALID county
     truthvar = 1
     while truthvar == 1:
         county = input(
@@ -75,7 +77,7 @@ def getValidCounty():
                     break
 
 
-def askCompareCounty(county):
+def askCompareCounty(county): # asks if the user would like to compare counties
     truthvar = 1
     while (truthvar == 1):
         useroption = input("Would you like to compare this county to others?\nPlease enter y/n: ")
@@ -89,7 +91,7 @@ def askCompareCounty(county):
             print("Invalid entry. Please try again.")
 
 
-def beforeCompareCounty(county1, county2):
+def beforeCompareCounty(county1, county2): # necessary set up for comparing counties
     truthvar = 0
     while truthvar == 0:
         askinterval = input(

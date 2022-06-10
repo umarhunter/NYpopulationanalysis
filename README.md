@@ -1,6 +1,11 @@
-**Link to Repl: **
+**Link to Repl: [Click here](https://replit.com/@umarhunter/NY-State-Population-Analysis?v=1)**
 
-Program Description: Uses Python's Pandas, Matplotlib, and other libraries to analyze population data for the state of New York. Allows user to select from a variety of options to analyze data.
+![Image 1](img/img1.png)     
+![Image 2](img/img2.png)   
+![Image 3](img/img3.png) 
+![Image 4](img/img4.png) 
+
+Program Description: Uses Python's Pandas, Matplotlib, and other libraries to analyze population data for the state of New York. Allows user to select from a variety of options to analyze data and makes predictions based off starting population.
 
 **Current Version:** 3
 
